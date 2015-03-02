@@ -52,29 +52,34 @@ class CreateHerringboneTool(object):
         param2 = arcpy.Parameter(
             displayName="Output features",
             name="out_features",
-            datatype="GPFeatureLayer",
-            parameterType="Derived",
+            datatype="DEFeatureClass",
+            parameterType="Required",
             direction="Output")
 
         return [param0, param1, param2]
 
     def execute(self, parameters, messages):
-        bounds = parameters[0].value.hullRectangle.split(' ')
+        extent_features = parameters[0].valueAsText
+        desc = arcpy.Describe(extent_features)
+        lower_left = (desc.extent.XMin, desc.extent.YMin)
+        upper_right = (desc.extent.XMax, desc.extent.YMax)
         grid_distance = parameters[1].value
         out_features = parameters[2].valueAsText
 
-        arcpy.addMessage("Creating herringbone pattern.")
-        arcpy.addMessage("Lower left corner: {}".format(bounds[:2]))
-        arcpy.addMessage("Upper right corner: {}".format(bounds[2:]))
-        arcpy.addMessage("Grid distance: {}".format(grid_distance))
+        arcpy.AddMessage("Creating herringbone pattern.")
+        arcpy.AddMessage("Lower left corner: {}".format(lower_left))
+        arcpy.AddMessage("Upper right corner: {}".format(upper_right))
+        arcpy.AddMessage("Grid distance: {}".format(grid_distance))
 
-        pattern = herringbone.Herringbone(lower_left=bounds[:2],
-                                          upper_right=bounds[2:],
+        pattern = herringbone.Herringbone(lower_left=lower_left,
+                                          upper_right=upper_right,
                                           distance=grid_distance)
 
         pointGeoms = [arcpy.PointGeometry(arcpy.Point(point[0],
                                                       point[1]))
                       for point in pattern.points()]
 
-        arcpy.addMessage("Saving output point feature class to {}".format(out_features))
-        arcpy.CopyFeatures_management(pointGeoms, out_features)
+        arcpy.CopyFeatures_management(pointGeoms, 'in_memory/all_points')
+
+        arcpy.AddMessage("Saving output point feature class to {}".format(out_features))
+        arcpy.Clip_analysis('in_memory/all_points', extent_features, out_features)
