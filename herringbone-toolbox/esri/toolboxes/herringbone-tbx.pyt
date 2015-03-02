@@ -56,7 +56,15 @@ class CreateHerringboneTool(object):
             parameterType="Required",
             direction="Output")
 
-        return [param0, param1, param2]
+        param3 = arcpy.Parameter(
+            displayName="Clip to extent",
+            name="clip_extent",
+            datatype="Boolean",
+            parameterType="Required",
+            direction="Input")
+        param3.value = True
+
+        return [param0, param1, param2, param3]
 
     def execute(self, parameters, messages):
         extent_features = parameters[0].valueAsText
@@ -65,6 +73,7 @@ class CreateHerringboneTool(object):
         upper_right = (desc.extent.XMax, desc.extent.YMax)
         grid_distance = parameters[1].value
         out_features = parameters[2].valueAsText
+        clip_extents = parameters[3].value
 
         arcpy.AddMessage("Creating herringbone pattern.")
         arcpy.AddMessage("Lower left corner: {}".format(lower_left))
@@ -78,8 +87,11 @@ class CreateHerringboneTool(object):
         pointGeoms = [arcpy.PointGeometry(arcpy.Point(point[0],
                                                       point[1]))
                       for point in pattern.points()]
-
         arcpy.CopyFeatures_management(pointGeoms, 'in_memory/all_points')
 
-        arcpy.AddMessage("Saving output point feature class to {}".format(out_features))
-        arcpy.Clip_analysis('in_memory/all_points', extent_features, out_features)
+        if clip_extents:
+            arcpy.AddMessage("Clipping features and saving to point feature class {}.".format(out_features))
+            arcpy.Clip_analysis('in_memory/all_points', extent_features, out_features)
+        else:
+            arcpy.AddMessage("Saving output point feature class to {}.".format(out_features))
+            arcpy.CopyFeatures_management('in_memory/all_points', out_features)
