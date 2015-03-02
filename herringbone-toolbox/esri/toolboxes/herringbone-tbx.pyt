@@ -75,7 +75,6 @@ class CreateHerringboneTool(object):
         out_features = parameters[2].valueAsText
         clip_extents = parameters[3].value
 
-        arcpy.AddMessage("Creating herringbone pattern.")
         arcpy.AddMessage("Lower left corner: {}".format(lower_left))
         arcpy.AddMessage("Upper right corner: {}".format(upper_right))
         arcpy.AddMessage("Grid distance: {}".format(grid_distance))
