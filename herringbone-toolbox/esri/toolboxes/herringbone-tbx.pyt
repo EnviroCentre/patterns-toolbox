@@ -6,7 +6,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#    http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,6 +16,7 @@
 
 import arcpy
 import herringbone
+import math
 
 
 class Toolbox(object):
@@ -67,11 +68,15 @@ class CreateHerringboneTool(object):
         return [param0, param1, param2, param3]
 
     def execute(self, parameters, messages):
+        grid_distance = parameters[1].value
+
         extent_features = parameters[0].valueAsText
         desc = arcpy.Describe(extent_features)
-        lower_left = (desc.extent.XMin, desc.extent.YMin)
-        upper_right = (desc.extent.XMax, desc.extent.YMax)
-        grid_distance = parameters[1].value
+        lower_left = (math.floor(desc.extent.XMin / grid_distance) * grid_distance,
+                      math.floor(desc.extent.YMin / grid_distance) * grid_distance)
+        upper_right = (math.ceil(desc.extent.XMax / grid_distance) * grid_distance,
+                       math.ceil(desc.extent.YMax / grid_distance) * grid_distance)
+
         out_features = parameters[2].valueAsText
         clip_extents = parameters[3].value
 
