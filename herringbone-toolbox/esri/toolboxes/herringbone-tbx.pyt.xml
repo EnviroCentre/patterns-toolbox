@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="en">
+    <Esri>
+        <CreaDate>20150302</CreaDate>
+        <CreaTime>19434100</CreaTime>
+        <ArcGISFormat>1.0</ArcGISFormat>
+        <SyncOnce>TRUE</SyncOnce>
+        <ModDate>20150302</ModDate>
+        <ModTime>210807</ModTime>
+    </Esri>
+    <toolbox name="herringbone-tbx" alias="Herringbone">
+        <arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.2\Help\gp</arcToolboxHelpPath>
+        <toolsets/>
+    </toolbox>
+    <dataIdInfo>
+        <idCitation>
+            <resTitle>herringbone-tbx</resTitle>
+        </idCitation>
+    </dataIdInfo>
+    <distInfo>
+        <distributor>
+            <distorFormat>
+                <formatName>ArcToolbox Toolbox</formatName>
+            </distorFormat>
+        </distributor>
+    </distInfo>
+</metadata>
