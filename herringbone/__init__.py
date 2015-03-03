@@ -42,7 +42,7 @@ class Herringbone(object):
         """
         Return a list of herringbone pattern points.
 
-        :return: list of points as `(x, y)` tuples.
+        :return: list of points as `(x, y, x_grid, y_grid)` tuples.
         :rtype: list
         """
         result = []
@@ -55,21 +55,22 @@ class Herringbone(object):
         x_offset = [0.25, 1.25, 0, 1]
 
         # Start first row
-        y = self.lower_left[1]
-        # Measure value
-        m = 0
+        y = y_grid = self.lower_left[1]
+
         while y <= self.upper_right[1]:
             # First x-coordinate in row
-            x = x_offset[y_index] * self.distance + self.lower_left[0]
+            x_grid = self.lower_left[0] + round(x_offset[y_index])
+            x = self.lower_left[0] + x_offset[y_index] * self.distance
 
             while x <= self.upper_right[0]:
                 # Append point coordinates to list
-                result.append((x, y, m))
-                m += 1
+                result.append((x, y, x_grid, y_grid))
                 # Increase x-coordinate
+                x_grid += 2 * self.distance
                 x += 2 * self.distance
 
             # Increase y-coordinate
+            y_grid += round(delta_y[y_index]) * self.distance  # Only increase y if delta_y == 0.75
             y += delta_y[y_index] * self.distance
             # Increase y-index cyclicly
             y_index = (y_index + 1) % 4

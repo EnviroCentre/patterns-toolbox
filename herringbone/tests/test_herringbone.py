@@ -23,47 +23,47 @@ class TestHerringBone(unittest.TestCase):
 
     def test_single_unit_herringbone(self):
         hb = Herringbone((0, 0), (1.25, 1.25), 1)
-        expected_points = [(0.25, 0, 0),
-                           (1.25, 0.25, 1),
-                           (0, 1, 2),
-                           (1, 1.25, 3)]
+        expected_points = [(0.25, 0,    0, 0),
+                           (1.25, 0.25, 1, 0),
+                           (0,    1.00, 0, 1),
+                           (1,    1.25, 1, 1)]
         self.assertEqual(hb.points(), expected_points)
 
     def test_two_unit_herringbone(self):
         hb = Herringbone((0, 0), (3.25, 1.25), 1)
-        expected_points = [(0.25, 0, 0),
-                           (2.25, 0, 1),
-                           (1.25, 0.25, 2),
-                           (3.25, 0.25, 3),
-                           (0, 1, 4),
-                           (2, 1, 5),
-                           (1, 1.25, 6),
-                           (3, 1.25, 7)]
+        expected_points = [(0.25, 0.00, 0, 0),
+                           (2.25, 0.00, 2, 0),
+                           (1.25, 0.25, 1, 0),
+                           (3.25, 0.25, 3, 0),
+                           (0.00, 1.00, 0, 1),
+                           (2.00, 1.00, 2, 1),
+                           (1.00, 1.25, 1, 1),
+                           (3.00, 1.25, 3, 1)]
         self.assertEqual(hb.points(), expected_points)
 
     def test_four_unit_herringbone(self):
         hb = Herringbone((0, 0), (3.25, 3.25), 1)
-        expected_points = [(0.25, 0, 0),
-                           (2.25, 0, 1),
-                           (1.25, 0.25, 2),
-                           (3.25, 0.25, 3),
-                           (0, 1, 4),
-                           (2, 1, 5),
-                           (1, 1.25, 6),
-                           (3, 1.25, 7),
+        expected_points = [(0.25, 0.00, 0, 0),
+                           (2.25, 0.00, 2, 0),
+                           (1.25, 0.25, 1, 0),
+                           (3.25, 0.25, 3, 0),
+                           (0.00, 1.00, 0, 1),
+                           (2.00, 1.00, 2, 1),
+                           (1.00, 1.25, 1, 1),
+                           (3.00, 1.25, 3, 1),
 
-                           (0.25, 2, 8),
-                           (2.25, 2, 9),
-                           (1.25, 2.25, 10),
-                           (3.25, 2.25, 11),
-                           (0, 3, 12),
-                           (2, 3, 13),
-                           (1, 3.25, 14),
-                           (3, 3.25, 15)]
+                           (0.25, 2.00, 0, 2),
+                           (2.25, 2.00, 2, 2),
+                           (1.25, 2.25, 1, 2),
+                           (3.25, 2.25, 3, 2),
+                           (0.00, 3.00, 0, 3),
+                           (2.00, 3.00, 2, 3),
+                           (1.00, 3.25, 1, 3),
+                           (3.00, 3.25, 3, 3)]
         self.assertEqual(hb.points(), expected_points)
 
     def test_single_square_herringbone(self):
         hb = Herringbone((0, 0), (1, 1), 1)
-        expected_points = [(0.25, 0, 0),
-                           (0, 1, 1)]
+        expected_points = [(0.25, 0, 0, 0),
+                           (0.00, 1, 0, 1)]
         self.assertEqual(hb.points(), expected_points)
