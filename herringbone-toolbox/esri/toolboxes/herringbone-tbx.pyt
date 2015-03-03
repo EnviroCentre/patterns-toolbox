@@ -72,6 +72,7 @@ class CreateHerringboneTool(object):
 
         extent_features = parameters[0].valueAsText
         desc = arcpy.Describe(extent_features)
+        spatial_ref = desc.spatialReference
         lower_left = (desc.extent.XMin - math.fmod(desc.extent.XMin, grid_distance),
                       desc.extent.YMin - math.fmod(desc.extent.YMin, grid_distance))
         upper_right = (desc.extent.XMax - math.fmod(desc.extent.XMax, grid_distance) + grid_distance,
@@ -88,10 +89,11 @@ class CreateHerringboneTool(object):
                                           upper_right=upper_right,
                                           distance=grid_distance)
 
-        pointGeoms = [arcpy.PointGeometry(arcpy.Point(point[0],
-                                                      point[1]))
-                      for point in pattern.points()]
-        arcpy.CopyFeatures_management(pointGeoms, 'in_memory/all_points')
+        point_geoms = [arcpy.PointGeometry(arcpy.Point(point[0],
+                                                       point[1]),
+                                           spatial_ref)
+                       for point in pattern.points()]
+        arcpy.CopyFeatures_management(point_geoms, 'in_memory/all_points')
 
         if clip_extents:
             arcpy.AddMessage("Clipping features and saving to point feature class {}.".format(out_features))
