@@ -72,10 +72,10 @@ class CreateHerringboneTool(object):
 
         extent_features = parameters[0].valueAsText
         desc = arcpy.Describe(extent_features)
-        lower_left = (math.floor(desc.extent.XMin / grid_distance) * grid_distance,
-                      math.floor(desc.extent.YMin / grid_distance) * grid_distance)
-        upper_right = (math.ceil(desc.extent.XMax / grid_distance) * grid_distance,
-                       math.ceil(desc.extent.YMax / grid_distance) * grid_distance)
+        lower_left = (desc.extent.XMin - math.fmod(desc.extent.XMin, grid_distance),
+                      desc.extent.YMin - math.fmod(desc.extent.YMin, grid_distance))
+        upper_right = (desc.extent.XMax - math.fmod(desc.extent.XMax, grid_distance) + grid_distance,
+                       desc.extent.YMax - math.fmod(desc.extent.YMax, grid_distance) + grid_distance)
 
         out_features = parameters[2].valueAsText
         clip_extents = parameters[3].value
