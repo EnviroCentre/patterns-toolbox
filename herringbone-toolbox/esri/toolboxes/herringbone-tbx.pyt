@@ -15,8 +15,10 @@
 # limitations under the License.
 
 import arcpy
+import arcpy.da
 import herringbone
 import math
+import numpy
 
 
 class Toolbox(object):
@@ -89,11 +91,15 @@ class CreateHerringboneTool(object):
                                           upper_right=upper_right,
                                           distance=grid_distance)
 
-        point_geoms = [arcpy.PointGeometry(arcpy.Point(point[0],
-                                                       point[1]),
-                                           spatial_ref)
-                       for point in pattern.points()]
-        arcpy.CopyFeatures_management(point_geoms, 'in_memory/all_points')
+        point_array = numpy.array(pattern.points(),
+                                  numpy.dtype([
+                                      ('x', numpy.float32),
+                                      ('y', numpy.float32),
+                                      ('x_grid', numpy.float32),
+                                      ('y_grid', numpy.float32)
+                                  ]))
+        arcpy.da.NumPyArrayToFeatureClass(point_array, 'in_memory/all_points', ('x', 'y'),
+                                          spatial_ref)
 
         if clip_extents:
             arcpy.AddMessage("Clipping features and saving to point feature class {}.".format(out_features))
@@ -101,3 +107,5 @@ class CreateHerringboneTool(object):
         else:
             arcpy.AddMessage("Saving output point feature class to {}.".format(out_features))
             arcpy.CopyFeatures_management('in_memory/all_points', out_features)
+
+        arcpy.Delete_management('in_memory/all_points')
