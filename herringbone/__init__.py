@@ -59,7 +59,7 @@ class Herringbone(object):
 
         while y <= self.upper_right[1]:
             # First x-coordinate in row
-            x_grid = self.lower_left[0] + round(x_offset[y_index])
+            x_grid = self.lower_left[0] + round(x_offset[y_index]) * self.distance
             x = self.lower_left[0] + x_offset[y_index] * self.distance
 
             while x <= self.upper_right[0]:
