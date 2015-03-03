@@ -6,7 +6,7 @@
 		<ArcGISFormat>1.0</ArcGISFormat>
 		<SyncOnce>TRUE</SyncOnce>
 		<ModDate>20150303</ModDate>
-		<ModTime>000849</ModTime>
+		<ModTime>010600</ModTime>
 	</Esri>
 	<toolbox name="herringbone-tbx" alias="Herringbone">
 		<arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.2\Help\gp</arcToolboxHelpPath>

@@ -56,13 +56,16 @@ class Herringbone(object):
 
         # Start first row
         y = self.lower_left[1]
+        # Measure value
+        m = 0
         while y <= self.upper_right[1]:
             # First x-coordinate in row
             x = x_offset[y_index] * self.distance + self.lower_left[0]
 
             while x <= self.upper_right[0]:
                 # Append point coordinates to list
-                result.append((x, y))
+                result.append((x, y, m))
+                m += 1
                 # Increase x-coordinate
                 x += 2 * self.distance
 
