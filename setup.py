@@ -16,10 +16,11 @@
 
 
 from distutils.core import setup
+import version
 
 setup(
     name='herringbone-toolbox',
-    version='0.1.0',
+    version=version.update()['str'],
     packages=[
         'herringbone',
         'herringbone-toolbox'
