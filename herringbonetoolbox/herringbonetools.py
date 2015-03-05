@@ -15,16 +15,9 @@
 # limitations under the License.
 
 import arcpy
-import herringbone
+import numpy as np
 import math
-import numpy
-
-
-class Toolbox(object):
-    def __init__(self):
-        self.label = "Herringbone"
-        self.alias = "Herringbone"
-        self.tools = [CreateHerringboneTool]
+import herringbone
 
 
 class CreateHerringboneTool(object):
@@ -91,7 +84,7 @@ class CreateHerringboneTool(object):
             name="sort_first",
             datatype="GPString",
             parameterType="Required",
-            direction="Input"
+            direction="Inpnumut"
         )
         param6.filter.list = ["SW", "NW", "NE", "SE"]
         param6.value = param6.filter.list[0]
@@ -120,19 +113,19 @@ class CreateHerringboneTool(object):
         arcpy.AddMessage("Grid distance: {}".format(grid_distance))
 
         pattern = herringbone.Herringbone(lower_left, upper_right, grid_distance)
-        point_array = numpy.array(pattern.points(),
-                                  numpy.dtype([
-                                      ('x', numpy.float32),
-                                      ('y', numpy.float32),
-                                      ('x_grid', numpy.float32),
-                                      ('y_grid', numpy.float32)
-                                  ]))
+        point_array = np.array(pattern.points(),
+                               np.dtype([
+                                   ('x', np.float32),
+                                   ('y', np.float32),
+                                   ('x_grid', np.float32),
+                                   ('y_grid', np.float32)
+                               ]))
 
         order = {
             'EAST_WEST': ['y_grid', 'x_grid'],
             'NORTH_SOUTH': ['x_grid', 'y_grid']
         }
-        ordered_indices = numpy.argsort(point_array, order=order[sort_order])
+        ordered_indices = np.argsort(point_array, order=order[sort_order])
         arcpy.da.NumPyArrayToFeatureClass(point_array[ordered_indices], 'in_memory/all_points', ('x', 'y'), spatial_ref)
 
         if clip_extents:

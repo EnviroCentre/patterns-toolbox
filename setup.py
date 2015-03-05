@@ -19,14 +19,14 @@ from distutils.core import setup
 import version
 
 setup(
-    name='herringbone-toolbox',
+    name='herringbonetoolbox',
     version=version.update()['str'],
     packages=[
         'herringbone',
-        'herringbone-toolbox'
+        'herringbonetoolbox'
     ],
-    package_dir={'herringbone-toolbox': 'herringbone-toolbox'},
-    package_data={'herringbone-toolbox': ['esri/toolboxes/*.*']},
+    package_dir={'herringbonetoolbox': 'herringbonetoolbox'},
+    package_data={'herringbonetoolbox': ['esri/toolboxes/*.*']},
     license='Apache v2.0',
     author='Florenz A. P. Hollebrandse',
     author_email='fhollebrandse@envirocentre.co.uk',
