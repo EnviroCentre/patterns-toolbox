@@ -15,7 +15,6 @@
 # limitations under the License.
 
 import arcpy
-import arcpy.da
 import herringbone
 import math
 import numpy
@@ -67,7 +66,37 @@ class CreateHerringboneTool(object):
             direction="Input")
         param3.value = True
 
-        return [param0, param1, param2, param3]
+        param4 = arcpy.Parameter(
+            displayName="Sort order",
+            name="sort_order",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input"
+        )
+        param4.filter.list = ["EAST_WEST", "NORTH_SOUTH"]
+        param4.value = param4.filter.list[0]
+
+        param5 = arcpy.Parameter(
+            displayName="Sort shape",
+            name="sort_shape",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input"
+        )
+        param5.filter.list = ["S", "Z"]
+        param5.value = param5.filter.list[0]
+
+        param6 = arcpy.Parameter(
+            displayName="Sort first point",
+            name="sort_first",
+            datatype="GPString",
+            parameterType="Required",
+            direction="Input"
+        )
+        param6.filter.list = ["SW", "NW", "NE", "SE"]
+        param6.value = param6.filter.list[0]
+
+        return [param0, param1, param2, param3, param4, param5, param6]
 
     def execute(self, parameters, messages):
         grid_distance = parameters[1].value
@@ -82,15 +111,15 @@ class CreateHerringboneTool(object):
 
         out_features = parameters[2].valueAsText
         clip_extents = parameters[3].value
+        sort_order = parameters[4].valueAsText
+        sort_shape = parameters[5].valueAsText
+        sort_first = parameters[6].valueAsText
 
         arcpy.AddMessage("Lower left corner: {}".format(lower_left))
         arcpy.AddMessage("Upper right corner: {}".format(upper_right))
         arcpy.AddMessage("Grid distance: {}".format(grid_distance))
 
-        pattern = herringbone.Herringbone(lower_left=lower_left,
-                                          upper_right=upper_right,
-                                          distance=grid_distance)
-
+        pattern = herringbone.Herringbone(lower_left, upper_right, grid_distance)
         point_array = numpy.array(pattern.points(),
                                   numpy.dtype([
                                       ('x', numpy.float32),
@@ -98,8 +127,13 @@ class CreateHerringboneTool(object):
                                       ('x_grid', numpy.float32),
                                       ('y_grid', numpy.float32)
                                   ]))
-        arcpy.da.NumPyArrayToFeatureClass(point_array, 'in_memory/all_points', ('x', 'y'),
-                                          spatial_ref)
+
+        order = {
+            'EAST_WEST': ['y_grid', 'x_grid'],
+            'NORTH_SOUTH': ['x_grid', 'y_grid']
+        }
+        ordered_indices = numpy.argsort(point_array, order=order[sort_order])
+        arcpy.da.NumPyArrayToFeatureClass(point_array[ordered_indices], 'in_memory/all_points', ('x', 'y'), spatial_ref)
 
         if clip_extents:
             arcpy.AddMessage("Clipping features and saving to point feature class {}.".format(out_features))
