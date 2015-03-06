@@ -104,9 +104,9 @@ class CreateHerringboneTool(object):
 
         out_features = parameters[2].valueAsText
         clip_extents = parameters[3].value
-        sort_order = parameters[4].valueAsText
-        sort_shape = parameters[5].valueAsText
-        sort_first = parameters[6].valueAsText
+        sort_order = parameters[4].valueAsText.upper()
+        sort_shape = parameters[5].valueAsText.upper()
+        sort_first = parameters[6].valueAsText.upper()
 
         arcpy.AddMessage("Lower left corner: {}".format(lower_left))
         arcpy.AddMessage("Upper right corner: {}".format(upper_right))
@@ -121,10 +121,17 @@ class CreateHerringboneTool(object):
                                    ('y_grid', np.float32)
                                ]))
 
+        # principal sort axis
         order = {
             'EAST_WEST': ['y_grid', 'x_grid'],
             'NORTH_SOUTH': ['x_grid', 'y_grid']
         }
+        # sort shape
+        if sort_shape == 'S':
+            # x_grid values, every other y_grid, multiply by -1 (and vice verse for NORTH_SOUTH
+            point_array[order[sort_order][1]][np.fmod(point_array[order[sort_order][0]], 2 * grid_distance) == 0] *= -1
+
+        # actual sorting
         ordered_indices = np.argsort(point_array, order=order[sort_order])
         arcpy.da.NumPyArrayToFeatureClass(point_array[ordered_indices], 'in_memory/all_points', ('x', 'y'), spatial_ref)
 
