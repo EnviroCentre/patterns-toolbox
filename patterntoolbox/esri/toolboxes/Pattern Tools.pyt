@@ -14,11 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from herringbonetoolbox.herringbonetools import CreateHerringboneTool
+from patterntoolbox.herringbonetools import CreateHerringboneTool
 
 
 class Toolbox(object):
     def __init__(self):
-        self.label = "Herringbone"
-        self.alias = "Herringbone"
+        self.label = "Pattern Tools"
+        self.alias = "Pattern_Tools"
         self.tools = [CreateHerringboneTool]

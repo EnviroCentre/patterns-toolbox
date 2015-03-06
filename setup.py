@@ -19,16 +19,16 @@ from distutils.core import setup
 import version
 
 setup(
-    name='herringbonetoolbox',
+    name='patterntoolbox',
     version=version.update()['str'],
     packages=[
         'herringbone',
-        'herringbonetoolbox'
+        'patterntoolbox'
     ],
-    package_dir={'herringbonetoolbox': 'herringbonetoolbox'},
-    package_data={'herringbonetoolbox': ['esri/toolboxes/*.*']},
+    #package_dir={'patterntoolbox': 'patterntoolbox'},
+    package_data={'patterntoolbox': ['esri/toolboxes/*.*']},
     license='Apache v2.0',
     author='Florenz A. P. Hollebrandse',
     author_email='fhollebrandse@envirocentre.co.uk',
-    description='ArcGIS toolbox to create a herringbone pattern'
+    description='ArcGIS toolbox to create patterns'
 )
