@@ -128,7 +128,8 @@ class CreateHerringboneTool(object):
         }
         # sort shape
         if sort_shape == 'S':
-            # x_grid values, every other y_grid, multiply by -1 (and vice verse for NORTH_SOUTH
+            # x_grid values, every other y_grid, multiply by -1 (and vice verse for NORTH_SOUTH)
+            # point_array['x_grid'][np.fmod(point_array['y_grid'], 2*grid_distance) == 0]
             point_array[order[sort_order][1]][np.fmod(point_array[order[sort_order][0]], 2 * grid_distance) == 0] *= -1
 
         # actual sorting
