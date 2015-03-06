@@ -1,5 +1,4 @@
-# Herringbone pattern toolbox
+# Patterns toolbox
 
-![Herringbone pattern example](herringbone.inkscape.svg)
 
-ArcGIS toolbox to create a herringbone pattern.
+ArcGIS toolbox to create patterns.
