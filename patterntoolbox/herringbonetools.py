@@ -97,10 +97,9 @@ class CreateHerringboneTool(object):
         extent_features = parameters[0].valueAsText
         desc = arcpy.Describe(extent_features)
         spatial_ref = desc.spatialReference
-        lower_left = (desc.extent.XMin - math.fmod(desc.extent.XMin, grid_distance),
-                      desc.extent.YMin - math.fmod(desc.extent.YMin, grid_distance))
-        upper_right = (desc.extent.XMax - math.fmod(desc.extent.XMax, grid_distance) + grid_distance,
-                       desc.extent.YMax - math.fmod(desc.extent.YMax, grid_distance) + grid_distance)
+        lower_left = (math.ceil(desc.extent.XMin / grid_distance) * grid_distance,
+                      math.ceil(desc.extent.YMin / grid_distance) * grid_distance)
+        upper_right = (desc.extent.XMax, desc.extent.YMax)
 
         out_features = parameters[2].valueAsText
         clip_extents = parameters[3].value
@@ -112,10 +111,14 @@ class CreateHerringboneTool(object):
         arcpy.AddMessage("Upper right corner: {}".format(upper_right))
         arcpy.AddMessage("Grid distance: {}".format(grid_distance))
 
-        arcpy.da.NumPyArrayToFeatureClass(
-            self._points_array(lower_left, upper_right, grid_distance, sort_order, sort_shape, sort_first),
-            'in_memory/all_points', ('x', 'y'), spatial_ref)
+        # Create pattern
+        pattern = herringbone.Herringbone(lower_left, upper_right, grid_distance)
+        pattern.sort(sort_order, sort_shape, sort_first)
 
+        # Convert to feature class
+        arcpy.da.NumPyArrayToFeatureClass(pattern.points, 'in_memory/all_points', ('x', 'y'), spatial_ref)
+
+        # Clip if necessary
         if clip_extents:
             arcpy.AddMessage("Clipping features and saving to point feature class {}.".format(out_features))
             arcpy.Clip_analysis('in_memory/all_points', extent_features, out_features)
@@ -125,40 +128,3 @@ class CreateHerringboneTool(object):
 
         arcpy.Delete_management('in_memory/all_points')
 
-    def _points_array(self, lower_left, upper_right, grid_distance, sort_order, sort_shape, sort_first):
-        """
-        Return sorted structured array of pattern points with columns `x` and `y`
-        """
-
-        pattern = herringbone.Herringbone(lower_left, upper_right, grid_distance)
-        # Convert to numpy structured array
-        points = np.array(pattern.points(),
-                          np.dtype([
-                              ('x', np.float32),
-                              ('y', np.float32),
-                              ('x_grid', np.float32),
-                              ('y_grid', np.float32)
-                          ]))
-
-        # principal sort axis
-        order = {
-            'EAST_WEST': ['y_grid', 'x_grid'],
-            'NORTH_SOUTH': ['x_grid', 'y_grid']
-        }
-
-        # starting corner
-        if sort_first[0] == 'N':
-            points['y_grid'] *= -1
-        if sort_first[1] == 'E':
-            points['x_grid'] *= -1
-
-        # sort shape
-        if sort_shape == 'S':
-            # x_grid values, every other y_grid, multiply by -1 (and vice verse for NORTH_SOUTH)
-            # points['x_grid'][np.fmod(points['y_grid'], 2) == 0]
-            points[order[sort_order][1]][np.fmod(points[order[sort_order][0]], 2) == 0] *= -1
-
-
-        # actual sorting
-        ordered_indices = np.argsort(points, order=order[sort_order])
-        return points[ordered_indices]
