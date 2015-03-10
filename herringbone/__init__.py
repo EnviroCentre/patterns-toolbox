@@ -14,6 +14,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import math
+
 
 class Herringbone(object):
     """
@@ -38,6 +40,12 @@ class Herringbone(object):
         self.upper_right = upper_right
         self.distance = distance
 
+    def row_count(self):
+        return int(math.floor(self.upper_right[0] - self.lower_left[0]) / self.distance)
+
+    def column_count(self):
+        return int(math.floor(self.upper_right[1] - self.lower_left[1]) / self.distance)
+
     def points(self):
         """
         Return a list of herringbone pattern points.
@@ -55,22 +63,23 @@ class Herringbone(object):
         x_offset = [0.25, 1.25, 0, 1]
 
         # Start first row
-        y = y_grid = self.lower_left[1]
+        y = self.lower_left[1]
+        y_grid = 0
 
         while y <= self.upper_right[1]:
             # First x-coordinate in row
-            x_grid = self.lower_left[0] + round(x_offset[y_index]) * self.distance
+            x_grid = round(x_offset[y_index])
             x = self.lower_left[0] + x_offset[y_index] * self.distance
 
             while x <= self.upper_right[0]:
                 # Append point coordinates to list
                 result.append((x, y, x_grid, y_grid))
                 # Increase x-coordinate
-                x_grid += 2 * self.distance
+                x_grid += 2
                 x += 2 * self.distance
 
             # Increase y-coordinate
-            y_grid += round(delta_y[y_index]) * self.distance  # Only increase y if delta_y == 0.75
+            y_grid += round(delta_y[y_index])  # Only increase y if delta_y == 0.75
             y += delta_y[y_index] * self.distance
             # Increase y-index cyclicly
             y_index = (y_index + 1) % 4

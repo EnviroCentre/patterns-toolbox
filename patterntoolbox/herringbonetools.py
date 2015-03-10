@@ -84,7 +84,7 @@ class CreateHerringboneTool(object):
             name="sort_first",
             datatype="GPString",
             parameterType="Required",
-            direction="Inpnumut"
+            direction="Input"
         )
         param6.filter.list = ["SW", "NW", "NE", "SE"]
         param6.value = param6.filter.list[0]
@@ -112,29 +112,9 @@ class CreateHerringboneTool(object):
         arcpy.AddMessage("Upper right corner: {}".format(upper_right))
         arcpy.AddMessage("Grid distance: {}".format(grid_distance))
 
-        pattern = herringbone.Herringbone(lower_left, upper_right, grid_distance)
-        point_array = np.array(pattern.points(),
-                               np.dtype([
-                                   ('x', np.float32),
-                                   ('y', np.float32),
-                                   ('x_grid', np.float32),
-                                   ('y_grid', np.float32)
-                               ]))
-
-        # principal sort axis
-        order = {
-            'EAST_WEST': ['y_grid', 'x_grid'],
-            'NORTH_SOUTH': ['x_grid', 'y_grid']
-        }
-        # sort shape
-        if sort_shape == 'S':
-            # x_grid values, every other y_grid, multiply by -1 (and vice verse for NORTH_SOUTH)
-            # point_array['x_grid'][np.fmod(point_array['y_grid'], 2*grid_distance) == 0]
-            point_array[order[sort_order][1]][np.fmod(point_array[order[sort_order][0]], 2 * grid_distance) == 0] *= -1
-
-        # actual sorting
-        ordered_indices = np.argsort(point_array, order=order[sort_order])
-        arcpy.da.NumPyArrayToFeatureClass(point_array[ordered_indices], 'in_memory/all_points', ('x', 'y'), spatial_ref)
+        arcpy.da.NumPyArrayToFeatureClass(
+            self._points_array(lower_left, upper_right, grid_distance, sort_order, sort_shape, sort_first),
+            'in_memory/all_points', ('x', 'y'), spatial_ref)
 
         if clip_extents:
             arcpy.AddMessage("Clipping features and saving to point feature class {}.".format(out_features))
@@ -144,3 +124,41 @@ class CreateHerringboneTool(object):
             arcpy.CopyFeatures_management('in_memory/all_points', out_features)
 
         arcpy.Delete_management('in_memory/all_points')
+
+    def _points_array(self, lower_left, upper_right, grid_distance, sort_order, sort_shape, sort_first):
+        """
+        Return sorted structured array of pattern points with columns `x` and `y`
+        """
+
+        pattern = herringbone.Herringbone(lower_left, upper_right, grid_distance)
+        # Convert to numpy structured array
+        points = np.array(pattern.points(),
+                          np.dtype([
+                              ('x', np.float32),
+                              ('y', np.float32),
+                              ('x_grid', np.float32),
+                              ('y_grid', np.float32)
+                          ]))
+
+        # principal sort axis
+        order = {
+            'EAST_WEST': ['y_grid', 'x_grid'],
+            'NORTH_SOUTH': ['x_grid', 'y_grid']
+        }
+
+        # starting corner
+        if sort_first[0] == 'N':
+            points['y_grid'] *= -1
+        if sort_first[1] == 'E':
+            points['x_grid'] *= -1
+
+        # sort shape
+        if sort_shape == 'S':
+            # x_grid values, every other y_grid, multiply by -1 (and vice verse for NORTH_SOUTH)
+            # points['x_grid'][np.fmod(points['y_grid'], 2) == 0]
+            points[order[sort_order][1]][np.fmod(points[order[sort_order][0]], 2) == 0] *= -1
+
+
+        # actual sorting
+        ordered_indices = np.argsort(points, order=order[sort_order])
+        return points[ordered_indices]
