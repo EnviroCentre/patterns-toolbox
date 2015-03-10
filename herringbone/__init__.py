@@ -43,10 +43,10 @@ class Herringbone(object):
         self.points = self._points_array()
 
     def row_count(self):
-        return int(math.floor(self.upper_right[0] - self.lower_left[0]) / self.distance)
+        return int(math.floor(self.upper_right[1] - self.lower_left[1] / self.distance)) + 1
 
     def column_count(self):
-        return int(math.floor(self.upper_right[1] - self.lower_left[1]) / self.distance)
+        return int(math.floor(self.upper_right[0] - self.lower_left[0] / self.distance)) + 1
 
     def _points(self):
         result = []
@@ -101,13 +101,15 @@ class Herringbone(object):
         # starting corner
         if sort_first[0] == 'N':
             self.points['y_grid'] *= -1
+            self.points['y_grid'] += self.row_count() - 1
         if sort_first[1] == 'E':
             self.points['x_grid'] *= -1
+            self.points['x_grid'] += self.column_count() - 1
 
         # sort shape
         if sort_shape == 'S':
             # x_grid values, every other y_grid, multiply by -1 (and vice verse for NORTH_SOUTH)
-            # points['x_grid'][np.fmod(points['y_grid'], 2) == 0]
+            # points['x_grid'][np.fmod(points['y_grid'], 2) == 1]
             self.points[order[sort_order][1]][np.fmod(self.points[order[sort_order][0]], 2) == 1] *= -1
 
         # actual sorting

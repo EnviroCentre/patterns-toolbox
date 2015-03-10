@@ -25,6 +25,14 @@ class TestHerringBone(unittest.TestCase):
         hb = Herringbone((0, 0), (0, 0), 1)
         nt.assert_array_equal(hb.points, np.array([], dtype=self.dtype))
 
+    def test_row_count(self):
+        hb = Herringbone((0, 0), (1.25, 1.25), 1)
+        self.assertEqual(hb.row_count(), 2)
+
+    def test_column_count(self):
+        hb = Herringbone((0, 0), (1.25, 1.25), 1)
+        self.assertEqual(hb.column_count(), 2)
+
     def test_single_unit_herringbone(self):
         hb = Herringbone((0, 0), (1.25, 1.25), 1)
         expected_points = np.array([(0.25, 0, 0, 0),
@@ -139,29 +147,49 @@ class TestHerringBone(unittest.TestCase):
     def test_sort_first_se(self):
         hb = Herringbone((0, 0), (1.25, 1.25), 1)
         hb.sort(sort_first='SE')
-        expected_points = np.array([(1.25, 0.25, -1, 0),
-                                    (0.25, 0, 0, 0),
-                                    (1, 1.25, -1, 1),
-                                    (0, 1.00, 0, 1)],
+        expected_points = np.array([(1.25, 0.25, 0, 0),
+                                    (0.25, 0, 1, 0),
+                                    (1, 1.25, 0, 1),
+                                    (0, 1.00, 1, 1)],
                                    dtype=self.dtype)
         nt.assert_array_equal(hb.points, expected_points)
 
     def test_sort_first_nw(self):
         hb = Herringbone((0, 0), (1.25, 1.25), 1)
         hb.sort(sort_first='NW')
-        expected_points = np.array([(0, 1.00, 0, -1),
-                                    (1, 1.25, 1, -1),
-                                    (0.25, 0, 0, 0),
-                                    (1.25, 0.25, 1, 0)],
+        expected_points = np.array([(0, 1.00, 0, 0),
+                                    (1, 1.25, 1, 0),
+                                    (0.25, 0, 0, 1),
+                                    (1.25, 0.25, 1, 1)],
                                    dtype=self.dtype)
         nt.assert_array_equal(hb.points, expected_points)
 
     def test_sort_first_ne(self):
         hb = Herringbone((0, 0), (1.25, 1.25), 1)
         hb.sort(sort_first='NE')
-        expected_points = np.array([(1, 1.25, -1, -1),
-                                    (0, 1.00, 0, -1),
-                                    (1.25, 0.25, -1, 0),
-                                    (0.25, 0, 0, 0)],
+        expected_points = np.array([(1, 1.25, 0, 0),
+                                    (0, 1.00, 1, 0),
+                                    (1.25, 0.25, 0, 1),
+                                    (0.25, 0, 1, 1)],
+                                   dtype=self.dtype)
+        nt.assert_array_equal(hb.points, expected_points)
+
+    def test_sort_first_nw_s_shape(self):
+        hb = Herringbone((0, 0), (1.25, 1.25), 1)
+        hb.sort(sort_first='NW', sort_shape='S')
+        expected_points = np.array([(0, 1.00, 0, 0),
+                                    (1, 1.25, 1, 0),
+                                    (1.25, 0.25, -1, 1),
+                                    (0.25, 0, 0, 1)],
+                                   dtype=self.dtype)
+        nt.assert_array_equal(hb.points, expected_points)
+
+    def test_sort_first_ne_s_shape(self):
+        hb = Herringbone((0, 0), (1.25, 1.25), 1)
+        hb.sort(sort_first='NE', sort_shape='S')
+        expected_points = np.array([(1, 1.25, 0, 0),
+                                    (0, 1, 1, 0),
+                                    (0.25, 0, -1, 1),
+                                    (1.25, 0.25, 0, 1)],
                                    dtype=self.dtype)
         nt.assert_array_equal(hb.points, expected_points)
