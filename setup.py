@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright 2015 EnviroCentre
+# Copyright 2015 Florenz A. P. Hollebrandse
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -25,7 +25,6 @@ setup(
         'herringbone',
         'patterntoolbox'
     ],
-    #package_dir={'patterntoolbox': 'patterntoolbox'},
     package_data={'patterntoolbox': ['esri/toolboxes/*.*']},
     license='Apache v2.0',
     author='Florenz A. P. Hollebrandse',

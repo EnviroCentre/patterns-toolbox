@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Copyright 2015 EnviroCentre
+# Copyright 2015 Florenz A. P. Hollebrandse
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
 # limitations under the License.
 
 import arcpy
-import numpy as np
 import math
 import herringbone
 
@@ -127,4 +126,3 @@ class CreateHerringboneTool(object):
             arcpy.CopyFeatures_management('in_memory/all_points', out_features)
 
         arcpy.Delete_management('in_memory/all_points')
-
