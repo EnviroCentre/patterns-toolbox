@@ -29,8 +29,16 @@ class TestHerringBone(unittest.TestCase):
         hb = Herringbone((0, 0), (1.25, 1.25), 1)
         self.assertEqual(hb.row_count(), 2)
 
+    def test_row_count_2(self):
+        hb = Herringbone((0, 0), (1.25, 1.25), 2)
+        self.assertEqual(hb.row_count(), 1)
+
     def test_column_count(self):
         hb = Herringbone((0, 0), (1.25, 1.25), 1)
+        self.assertEqual(hb.column_count(), 2)
+
+    def test_column_count_2(self):
+        hb = Herringbone((0, 0), (2.5, 2.5), 2)
         self.assertEqual(hb.column_count(), 2)
 
     def test_single_unit_herringbone(self):

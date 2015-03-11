@@ -43,10 +43,10 @@ class Herringbone(object):
         self.points = self._points_array()
 
     def row_count(self):
-        return int(math.floor(self.upper_right[1] - self.lower_left[1] / self.distance)) + 1
+        return int(math.floor((self.upper_right[1] - self.lower_left[1]) / self.distance)) + 1
 
     def column_count(self):
-        return int(math.floor(self.upper_right[0] - self.lower_left[0] / self.distance)) + 1
+        return int(math.floor((self.upper_right[0] - self.lower_left[0]) / self.distance)) + 1
 
     def _points(self):
         result = []
