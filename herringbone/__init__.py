@@ -32,7 +32,7 @@ class Herringbone(object):
         Create a herringbone pattern
 
         :param tuple lower_left: lower left coordinate of area to create herringbone pattern
-        :param tupe upper_right: upper right coordinate of area to create herringbone pattern
+        :param tuple upper_right: upper right coordinate of area to create herringbone pattern
         :param float distance: grid square distance
         :return: herringbone pattern
         :rtype: :class:`Herringbone`
@@ -41,6 +41,7 @@ class Herringbone(object):
         self.upper_right = upper_right
         self.distance = distance
         self.points = self._points_array()
+        self.is_sorted = False
 
     def row_count(self):
         return int(math.floor((self.upper_right[1] - self.lower_left[1]) / self.distance)) + 1
@@ -69,7 +70,7 @@ class Herringbone(object):
 
             while x <= self.upper_right[0]:
                 # Append point coordinates to list
-                result.append((x, y, x_grid, y_grid))
+                result.append((x, y, x_grid, y_grid, 0))
                 # Increase x-coordinate
                 x_grid += 2
                 x += 2 * self.distance
@@ -88,7 +89,8 @@ class Herringbone(object):
                             ('x', np.float32),
                             ('y', np.float32),
                             ('x_grid', np.int32),
-                            ('y_grid', np.int32)
+                            ('y_grid', np.int32),
+                            ('m', np.int32)
                         ]))
 
     def sort(self, sort_order='EAST_WEST', sort_shape='Z', sort_first='SW'):
@@ -115,3 +117,8 @@ class Herringbone(object):
         # actual sorting
         ordered_indices = np.argsort(self.points, order=order[sort_order])
         self.points = self.points[ordered_indices]
+
+        # add M (measure/order) values
+        self.points['m'] = np.arange(len(self.points))
+
+        self.is_sorted = True
