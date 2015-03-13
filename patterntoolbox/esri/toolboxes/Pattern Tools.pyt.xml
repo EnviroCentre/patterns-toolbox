@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <metadata xml:lang="en">
     <Esri>
         <CreaDate>20150313</CreaDate>
@@ -6,16 +5,28 @@
         <ArcGISFormat>1.0</ArcGISFormat>
         <SyncOnce>TRUE</SyncOnce>
         <ModDate>20150313</ModDate>
-        <ModTime>190708</ModTime>
+        <ModTime>20520000</ModTime>
+        <scaleRange>
+            <minScale>150000000</minScale>
+            <maxScale>5000</maxScale>
+        </scaleRange>
+        <ArcGISProfile>ItemDescription</ArcGISProfile>
     </Esri>
     <toolbox name="Pattern Tools" alias="Pattern_Tools">
         <arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.2\Help\gp</arcToolboxHelpPath>
-        <toolsets/>
     </toolbox>
     <dataIdInfo>
         <idCitation>
             <resTitle>Pattern Tools</resTitle>
         </idCitation>
+        <idPurp>Tools to create patterns and shapes.</idPurp>
+        <idCredit>© Copyright 2015, Florenz A. P. Hollebrandse</idCredit>
+        <searchKeys>
+            <keyword>patterns</keyword>
+            <keyword>grid</keyword>
+            <keyword>point</keyword>
+            <keyword>sequence</keyword>
+        </searchKeys>
     </dataIdInfo>
     <distInfo>
         <distributor>
@@ -24,4 +35,7 @@
             </distorFormat>
         </distributor>
     </distInfo>
+    <mdHrLv>
+        <ScopeCd value="005"></ScopeCd>
+    </mdHrLv>
 </metadata>

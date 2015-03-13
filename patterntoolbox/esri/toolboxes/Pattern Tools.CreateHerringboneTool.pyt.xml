@@ -5,7 +5,7 @@
         <ArcGISFormat>1.0</ArcGISFormat>
         <SyncOnce>TRUE</SyncOnce>
         <ModDate>20150313</ModDate>
-        <ModTime>19134200</ModTime>
+        <ModTime>20453400</ModTime>
         <scaleRange>
             <minScale>150000000</minScale>
             <maxScale>5000</maxScale>
@@ -33,34 +33,40 @@
             </param>
             <param name="clip_extent" displayname="Clip to extent" type="Required" direction="Input" datatype="Boolean"
                    expression="clip_extent">
-                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Whether to clip the
-                    pattern to the extent feature class. Alternatively a simple bounding box is used.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Whether
+                    to clip the pattern to the extent feature class. Alternatively a simple bounding box is used.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
             </param>
             <param name="sort_order" displayname="Sort order" type="Required" direction="Input" datatype="String"
                    expression="EAST_WEST | NORTH_SOUTH">
                 <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Sort along
-                    east-west (horizontal) axis or noth-south (vertical) axis.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+                    east-west (horizontal) axis or north-south (vertical) axis.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
             </param>
             <param name="sort_shape" displayname="Sort shape" type="Required" direction="Input" datatype="String"
                    expression="S | Z">
-                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Z-shape: start at
-                    beginning of each row (or column). S-shape: connect each row (or column) with the closest point on
-                    the next row (or column).&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;UL&gt;&lt;LI&gt;&lt;P&gt;&lt;SPAN&gt;Z-shape:
+                    start at beginning of each row (or column). &lt;/SPAN&gt;&lt;/P&gt;&lt;/LI&gt;&lt;LI&gt;&lt;P&gt;&lt;SPAN&gt;S-shape:
+                    connect each row (or column) with the closest point on the next row (or column).&lt;/SPAN&gt;&lt;/P&gt;&lt;/LI&gt;&lt;/UL&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
             </param>
             <param name="sort_first" displayname="Sort first point" type="Required" direction="Input" datatype="String"
                    expression="SW | NW | NE | SE">
                 <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Starting corner.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
             </param>
         </parameters>
-        <summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Create a herringbone pattern within
-            extent areas.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</summary>
+        <summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Create a herringbone
+            pattern within extent areas.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</summary>
     </tool>
     <dataIdInfo>
         <idCitation>
             <resTitle>Create herringbone</resTitle>
         </idCitation>
-        <idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Create a herringbone pattern within
-            extent areas.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
+        <idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Create a herringbone
+            pattern within extent areas.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
+        <idCredit>© Copyright 2015, Florenz A. P. Hollebrandse.</idCredit>
+        <searchKeys>
+            <keyword>pattern</keyword>
+            <keyword>herringbone</keyword>
+            <keyword>grid</keyword>
+        </searchKeys>
     </dataIdInfo>
     <distInfo>
         <distributor>
@@ -70,6 +76,6 @@
         </distributor>
     </distInfo>
     <mdHrLv>
-        <ScopeCd value="005"></ScopeCd>
+        <ScopeCd value="005"/>
     </mdHrLv>
 </metadata>
