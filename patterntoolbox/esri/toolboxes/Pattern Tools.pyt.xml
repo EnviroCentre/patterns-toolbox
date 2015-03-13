@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<metadata xml:lang="en">
+    <Esri>
+        <CreaDate>20150313</CreaDate>
+        <CreaTime>19070800</CreaTime>
+        <ArcGISFormat>1.0</ArcGISFormat>
+        <SyncOnce>TRUE</SyncOnce>
+        <ModDate>20150313</ModDate>
+        <ModTime>190708</ModTime>
+    </Esri>
+    <toolbox name="Pattern Tools" alias="Pattern_Tools">
+        <arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.2\Help\gp</arcToolboxHelpPath>
+        <toolsets/>
+    </toolbox>
+    <dataIdInfo>
+        <idCitation>
+            <resTitle>Pattern Tools</resTitle>
+        </idCitation>
+    </dataIdInfo>
+    <distInfo>
+        <distributor>
+            <distorFormat>
+                <formatName>ArcToolbox Toolbox</formatName>
+            </distorFormat>
+        </distributor>
+    </distInfo>
+</metadata>
