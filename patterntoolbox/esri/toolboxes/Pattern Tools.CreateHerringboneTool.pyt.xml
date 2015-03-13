@@ -1,0 +1,81 @@
+<metadata xml:lang="en">
+    <Esri>
+        <CreaDate>20150313</CreaDate>
+        <CreaTime>19071400</CreaTime>
+        <ArcGISFormat>1.0</ArcGISFormat>
+        <SyncOnce>TRUE</SyncOnce>
+        <ModDate>20150313</ModDate>
+        <ModTime>20453400</ModTime>
+        <scaleRange>
+            <minScale>150000000</minScale>
+            <maxScale>5000</maxScale>
+        </scaleRange>
+        <ArcGISProfile>ItemDescription</ArcGISProfile>
+    </Esri>
+    <tool name="CreateHerringboneTool" displayname="Create herringbone" toolboxalias="Pattern_Tools" xmlns="">
+        <arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.2\Help\gp</arcToolboxHelpPath>
+        <parameters>
+            <param name="extent_features" displayname="Extent" type="Required" direction="Input"
+                   datatype="Feature Layer" expression="extent_features">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Polygon features
+                    defining the extent to create
+                    features&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+            <param name="grid_distance" displayname="Grid distance" type="Required" direction="Input" datatype="Double"
+                   expression="grid_distance">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Mutual distance
+                    between points (square distance)&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+            <param name="out_features" displayname="Output features" type="Required" direction="Output"
+                   datatype="Feature Class" expression="out_features">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Output point
+                    feature class&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+            <param name="clip_extent" displayname="Clip to extent" type="Required" direction="Input" datatype="Boolean"
+                   expression="clip_extent">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Whether
+                    to clip the pattern to the extent feature class. Alternatively a simple bounding box is used.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+            <param name="sort_order" displayname="Sort order" type="Required" direction="Input" datatype="String"
+                   expression="EAST_WEST | NORTH_SOUTH">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Sort along
+                    east-west (horizontal) axis or north-south (vertical) axis.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+            <param name="sort_shape" displayname="Sort shape" type="Required" direction="Input" datatype="String"
+                   expression="S | Z">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;UL&gt;&lt;LI&gt;&lt;P&gt;&lt;SPAN&gt;Z-shape:
+                    start at beginning of each row (or column). &lt;/SPAN&gt;&lt;/P&gt;&lt;/LI&gt;&lt;LI&gt;&lt;P&gt;&lt;SPAN&gt;S-shape:
+                    connect each row (or column) with the closest point on the next row (or column).&lt;/SPAN&gt;&lt;/P&gt;&lt;/LI&gt;&lt;/UL&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+            <param name="sort_first" displayname="Sort first point" type="Required" direction="Input" datatype="String"
+                   expression="SW | NW | NE | SE">
+                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Starting corner.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
+            </param>
+        </parameters>
+        <summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Create a herringbone
+            pattern within extent areas.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</summary>
+    </tool>
+    <dataIdInfo>
+        <idCitation>
+            <resTitle>Create herringbone</resTitle>
+        </idCitation>
+        <idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Create a herringbone
+            pattern within extent areas.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
+        <idCredit>© Copyright 2015, Florenz A. P. Hollebrandse.</idCredit>
+        <searchKeys>
+            <keyword>pattern</keyword>
+            <keyword>herringbone</keyword>
+            <keyword>grid</keyword>
+        </searchKeys>
+    </dataIdInfo>
+    <distInfo>
+        <distributor>
+            <distorFormat>
+                <formatName>ArcToolbox Tool</formatName>
+            </distorFormat>
+        </distributor>
+    </distInfo>
+    <mdHrLv>
+        <ScopeCd value="005"/>
+    </mdHrLv>
+</metadata>

@@ -15,10 +15,11 @@
 # limitations under the License.
 
 from patterntoolbox.herringbonetools import CreateHerringboneTool
+from patterntoolbox.routetools import PointsToRoute
 
 
 class Toolbox(object):
     def __init__(self):
         self.label = "Pattern Tools"
         self.alias = "Pattern_Tools"
-        self.tools = [CreateHerringboneTool]
+        self.tools = [CreateHerringboneTool, PointsToRoute]

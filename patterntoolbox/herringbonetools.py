@@ -115,7 +115,8 @@ class CreateHerringboneTool(object):
         pattern.sort(sort_order, sort_shape, sort_first)
 
         # Convert to feature class
-        arcpy.da.NumPyArrayToFeatureClass(pattern.points, 'in_memory/all_points', ('x', 'y', '', 'm'), spatial_ref)
+        # pattern.points also as m-values, but NumPyArrayToFeatureClass has a bug and can't create PointM features
+        arcpy.da.NumPyArrayToFeatureClass(pattern.points[['x', 'y']], 'in_memory/all_points', ('x', 'y'), spatial_ref)
 
         # Clip if necessary
         if clip_extents:
