@@ -1,56 +1,54 @@
 <metadata xml:lang="en">
-    <Esri>
-        <CreaDate>20150313</CreaDate>
-        <CreaTime>19071500</CreaTime>
-        <ArcGISFormat>1.0</ArcGISFormat>
-        <SyncOnce>TRUE</SyncOnce>
-        <ModDate>20150313</ModDate>
-        <ModTime>20493800</ModTime>
-        <scaleRange>
-            <minScale>150000000</minScale>
-            <maxScale>5000</maxScale>
-        </scaleRange>
-        <ArcGISProfile>ItemDescription</ArcGISProfile>
-    </Esri>
-    <tool name="PointsToRoute" displayname="Points to route" toolboxalias="Pattern_Tools" xmlns="">
-        <arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.2\Help\gp</arcToolboxHelpPath>
-        <parameters>
-            <param name="point_features" displayname="Points" type="Required" direction="Input" datatype="Feature Layer"
-                   expression="point_features">
-                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Input point feature
+	<Esri>
+		<CreaDate>20150313</CreaDate>
+		<CreaTime>19071500</CreaTime>
+		<ArcGISFormat>1.0</ArcGISFormat>
+		<SyncOnce>TRUE</SyncOnce>
+		<ModDate>20150313</ModDate>
+		<ModTime>20493800</ModTime>
+		<scaleRange>
+			<minScale>150000000</minScale>
+			<maxScale>5000</maxScale>
+		</scaleRange>
+		<ArcGISProfile>ItemDescription</ArcGISProfile>
+	</Esri>
+	<tool name="PointsToRoute" displayname="Points to route" toolboxalias="Pattern_Tools" xmlns="">
+		<arcToolboxHelpPath>c:\program files (x86)\arcgis\desktop10.2\Help\gp</arcToolboxHelpPath>
+		<parameters>
+			<param name="point_features" displayname="Points" type="Required" direction="Input" datatype="Feature Layer" expression="point_features">
+				<dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Input point feature
                     class.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
-            </param>
-            <param name="out_features" displayname="Output features" type="Required" direction="Output"
-                   datatype="Feature Class" expression="out_features">
-                <dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Output polyline
+			</param>
+			<param name="out_features" displayname="Output features" type="Required" direction="Output" datatype="Feature Class" expression="out_features">
+				<dialogReference>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Output polyline
                     feature class.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</dialogReference>
-            </param>
-        </parameters>
-        <summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Create a route (polyline) by
+			</param>
+		</parameters>
+		<summary>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Create a route (polyline) by
             joining pattern points.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</summary>
-    </tool>
-    <dataIdInfo>
-        <idCitation>
-            <resTitle>Points to route</resTitle>
-        </idCitation>
-        <idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Create a route (polyline) by joining
+	</tool>
+	<dataIdInfo>
+		<idCitation>
+			<resTitle>Points to route</resTitle>
+		</idCitation>
+		<idAbs>&lt;DIV STYLE="text-align:Left;"&gt;&lt;DIV&gt;&lt;P&gt;&lt;SPAN&gt;Create a route (polyline) by joining
             pattern points.&lt;/SPAN&gt;&lt;/P&gt;&lt;/DIV&gt;&lt;/DIV&gt;</idAbs>
-        <idCredit>© Copyright 2015, Florenz A. P. Hollebrandse</idCredit>
-        <searchKeys>
-            <keyword>pattern</keyword>
-            <keyword>grid</keyword>
-            <keyword>route</keyword>
-            <keyword>point</keyword>
-        </searchKeys>
-    </dataIdInfo>
-    <distInfo>
-        <distributor>
-            <distorFormat>
-                <formatName>ArcToolbox Tool</formatName>
-            </distorFormat>
-        </distributor>
-    </distInfo>
-    <mdHrLv>
-        <ScopeCd value="005"></ScopeCd>
-    </mdHrLv>
+		<idCredit>© Copyright 2015, Florenz A. P. Hollebrandse</idCredit>
+		<searchKeys>
+			<keyword>pattern</keyword>
+			<keyword>grid</keyword>
+			<keyword>route</keyword>
+			<keyword>point</keyword>
+		</searchKeys>
+	</dataIdInfo>
+	<distInfo>
+		<distributor>
+			<distorFormat>
+				<formatName>ArcToolbox Tool</formatName>
+			</distorFormat>
+		</distributor>
+	</distInfo>
+	<mdHrLv>
+		<ScopeCd value="005"></ScopeCd>
+	</mdHrLv>
 </metadata>
