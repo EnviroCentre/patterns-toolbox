@@ -51,8 +51,16 @@ class AddLabelsTool(object):
 
         feature_count = int(arcpy.GetCount_management(point_features).getOutput(0))
         digits = int(math.floor(math.log(feature_count, 10))) + 1
-        expression = '"' + prefix + '{:0' + str(digits) + 'd}".format(!OBJECTID!)'
+        expression = '"' + prefix + '{:0' + str(digits) + 'd}".format(index())'
+        code_block = \
+"""i = 0
+
+def index():
+    global i
+    i += 1
+    return i
+"""
 
         arcpy.AddField_management(point_features, field_name, "TEXT", field_length=12)
-        arcpy.CalculateField_management(point_features, field_name, expression, "PYTHON_9.3")
+        arcpy.CalculateField_management(point_features, field_name, expression, "PYTHON_9.3", code_block)
 
