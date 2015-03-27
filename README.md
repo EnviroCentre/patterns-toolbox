@@ -1,5 +1,7 @@
 # Patterns toolbox
 
+![ArcMap displaying a herringbone pattern](arcmap-herringbone-pattern.png)
+
 ArcGIS toolbox to create patterns.
 
 Included tools:
@@ -8,7 +10,7 @@ Included tools:
  - Create herringbone
  - Points to route
 
-The toolbox has been tested on ArcGIS 10.2 and 10.3.
+The toolbox has been tested using ArcGIS 10.2 and 10.3.
 
 ## Installation
 
