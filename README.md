@@ -1,8 +1,8 @@
 # Patterns toolbox
 
-![ArcMap displaying a herringbone pattern](arcmap-herringbone-pattern.png)
-
 ArcGIS toolbox to create patterns.
+
+![ArcMap displaying a herringbone pattern](arcmap-herringbone-pattern.png)
 
 Included tools:
 
